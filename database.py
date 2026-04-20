@@ -3,12 +3,13 @@ from sqlalchemy.orm import sessionmaker, declarative_base
 import os
 from dotenv import load_dotenv
 
-load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), '.env'))
+load_dotenv()
 
 DATABASE_URL = os.getenv("DATABASE_URL")
 
 engine = create_engine(
-    DATABASE_URL
+    DATABASE_URL,
+    connect_args={"sslmode": "require"}
 )
 
 SessionLocal = sessionmaker(bind=engine)
